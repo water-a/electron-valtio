@@ -1,1 +1,1 @@
-export const setupRenderer = () => ElectronValtioBridge.getStore();
+export const setupRenderer = <T>(): T => ElectronValtioBridge.getStore();

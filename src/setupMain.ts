@@ -3,7 +3,7 @@ import { ipcMain, webContents } from 'electron';
 import { setup } from './setup';
 import { sync } from './sync';
 
-export const setupMain = (initialObject: object) => {
+export const setupMain = <T extends object>(initialObject: T) => {
   const store = proxy(initialObject);
   ipcMain.on('ev-forward', (_, path: string[], value: any) =>
     sync(store, path, value),
