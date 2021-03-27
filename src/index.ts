@@ -1,2 +1,2 @@
 export { setupMain } from './setupMain';
-export { setupRenderer } from './setupRenderer';
+export { setupRenderer } from './renderer';
