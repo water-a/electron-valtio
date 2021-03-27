@@ -10,14 +10,14 @@ This library was heavily inspired by electron-redux.
 
 ### Getting started
 
-`npm i valtio electron-valtio`;
+`npm i valtio electron-valtio`
 
-### Initializing the browser window
+#### Include the preload script when opening the browser window
 
 ```typescript
 ...
 const window = new BrowserWindow({
-  ...otherOptions,
+  ...other options,
   webPreferences: {
     preload: path.resolve(__dirname, 'node_modules/electron-valtio/dist/preload.js')
   }
