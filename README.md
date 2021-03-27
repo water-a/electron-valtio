@@ -29,7 +29,7 @@ const window = new BrowserWindow({
 
 ```typescript
 import { snapshot } from 'valtio/vanilla';
-import { setupMain } from 'electron-valtio/main';
+import { setupMain } from 'electron-valtio/dist/main';
 
 const store = setupMain({
   count: 0,
@@ -45,7 +45,7 @@ setTimeout(() => {
 
 ```typescript
 import { snapshot } from 'valtio/vanilla';
-import { setupRenderer } from 'electron-valtio/renderer';
+import { setupRenderer } from 'electron-valtio/dist/renderer';
 
 const store = setupRenderer();
 console.log(snapshot(store.count));
