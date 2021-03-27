@@ -1,11 +1,11 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import esbuild from 'esbuild';
+import { build, Plugin } from 'esbuild';
 import { resolve } from 'path';
 
-export const setNonRelativeImportsAsExternalPlugin: esbuild.Plugin = {
+export const setNonRelativeImportsAsExternalPlugin: Plugin = {
   name: 'Set non-relative imports as external',
-  setup(build) {
-    build.onResolve({ filter: /^[^\.]/ }, ({ path, namespace }) => {
+  setup({ onResolve }) {
+    onResolve({ filter: /^[^\.]/ }, ({ path, namespace }) => {
       if (namespace === '') {
         return {};
       }
@@ -14,7 +14,7 @@ export const setNonRelativeImportsAsExternalPlugin: esbuild.Plugin = {
   },
 };
 
-esbuild.build({
+build({
   bundle: true,
   entryPoints: [resolve(__dirname, 'src/preload.ts')],
   platform: 'node',
