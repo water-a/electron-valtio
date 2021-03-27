@@ -5,7 +5,7 @@
   "main": "dist",
   "scripts": {
     "lint": "eslint . --ext .ts",
-    "build": "tsc && ts-node build",
+    "build": "tsc && ts-node build && mv dist/index.js index.js && mv dist/index.d.ts index.d.ts",
     "postinstall": "npm run build"
   },
   "author": "",
