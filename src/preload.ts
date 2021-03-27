@@ -1,8 +1,11 @@
 import { contextBridge, ipcRenderer } from 'electron';
+import { proxy } from 'valtio/vanilla';
+import { setup } from './setup';
+import { sync } from './sync';
 
 declare global {
   interface Bridge {
-    getState: typeof getState;
+    getStore: typeof getStore;
   }
   interface Window {
     ElectronValtioBridge: Bridge;
@@ -10,13 +13,27 @@ declare global {
   const ElectronValtioBridge: Bridge;
 }
 
-export const getState = () => {
+const getState = () => {
   const state = ipcRenderer.sendSync('ev-get-state');
   return JSON.parse(state);
 };
 
+const getStore = () => {
+  let store = proxy(getState());
+  ipcRenderer.on('ev-forward', (_, path: string[], value: any) => {
+    try {
+      sync(store, path, value);
+    } catch {
+      store = proxy(getState());
+    }
+  });
+  return setup(store, (path, value) =>
+    ipcRenderer.send('ev-forward', path, value),
+  );
+};
+
 const bridge = {
-  getState,
+  getStore,
 };
 
 try {
