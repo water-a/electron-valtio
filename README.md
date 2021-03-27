@@ -32,11 +32,11 @@ import { snapshot } from 'valtio/vanilla';
 import { setupMain } from 'electron-valtio';
 
 const store = setupMain({
-  fishes: 0,
+  count: 0,
 });
 
 setTimeout(() => {
-  console.log(snapshot(store.fishes));
+  console.log(snapshot(store.count));
   // Output: 1
 }, 2000);
 ```
@@ -48,8 +48,31 @@ import { snapshot } from 'valtio/vanilla';
 import { setupRenderer } from 'electron-valtio';
 
 const store = setupRenderer();
-console.log(snapshot(store.fishes));
+console.log(snapshot(store.count));
 // Output: 0
 
-store.fishes++;
+store.count++;
+```
+
+### Use all the features of Valtio
+
+#### Main process
+
+```typescript
+import { store } from './store';
+const incrementCount = () => (store.count += 1);
+incrementCount();
+```
+
+#### Renderer process
+
+```typescript
+import React, { FC } from 'react';
+import { useSnapshot } from 'valtio';
+import { store } from './store';
+
+export const Counter: FC => () => {
+  const count = useSnapshot(store.count);
+  return <>{count}</>
+}
 ```
