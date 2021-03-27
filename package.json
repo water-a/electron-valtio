@@ -2,10 +2,10 @@
   "name": "electron-valtio",
   "version": "1.0.0",
   "description": "",
-  "main": "dist",
+  "main": "dist/index.js",
   "scripts": {
     "lint": "eslint . --ext .ts",
-    "build": "tsc && ts-node build && mv dist/index.js index.js && mv dist/index.d.ts index.d.ts",
+    "build": "tsc && ts-node build",
     "postinstall": "npm run build"
   },
   "author": "",
