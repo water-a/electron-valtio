@@ -2,7 +2,7 @@
   "name": "electron-valtio",
   "version": "0.0.1",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist",
   "scripts": {
     "lint": "eslint . --ext .ts",
     "build": "tsc && ts-node build",
