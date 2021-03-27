@@ -1,7 +1,8 @@
-import { build, Plugin } from 'esbuild';
-import path from 'path';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import esbuild from 'esbuild';
+import { resolve } from 'path';
 
-export const setNonRelativeImportsAsExternalPlugin: Plugin = {
+export const setNonRelativeImportsAsExternalPlugin: esbuild.Plugin = {
   name: 'Set non-relative imports as external',
   setup(build) {
     build.onResolve({ filter: /^[^\.]/ }, ({ path, namespace }) => {
@@ -13,12 +14,10 @@ export const setNonRelativeImportsAsExternalPlugin: Plugin = {
   },
 };
 
-const resolvePath = (filePath: string) => path.resolve(__dirname, filePath);
-
-build({
+esbuild.build({
   bundle: true,
-  entryPoints: [resolvePath('src/preload.ts')],
+  entryPoints: [resolve(__dirname, 'src/preload.ts')],
   platform: 'node',
   plugins: [setNonRelativeImportsAsExternalPlugin],
-  outfile: resolvePath('dist/preload.js'),
+  outfile: resolve(__dirname, 'dist/preload.js'),
 });
