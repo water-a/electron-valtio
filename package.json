@@ -10,11 +10,10 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "electron": "^12.0.1",
-    "valtio": "^1.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "valtio": "^1.0.0",
+    "electron": "^12.0.1",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
     "esbuild": "^0.10.2",
