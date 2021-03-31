@@ -5,7 +5,7 @@
   "main": "dist",
   "scripts": {
     "lint": "eslint . --ext .ts",
-    "build": "tsc && ts-node build",
+    "build": "tsc",
     "postinstall": "npm run build"
   },
   "author": "",
@@ -16,7 +16,6 @@
     "electron": "^12.0.1",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
-    "esbuild": "^0.10.2",
     "eslint": "^7.22.0",
     "eslint-config-airbnb-typescript": "^12.3.1",
     "eslint-config-prettier": "^8.1.0",
