@@ -1,4 +1,5 @@
 import { proxy } from 'valtio/vanilla';
+import { setup } from './setup';
 import { sync } from './sync';
 
 export const setupRenderer = <T extends object>(): T => {
@@ -6,6 +7,8 @@ export const setupRenderer = <T extends object>(): T => {
   const state = ElectronValtioBridge.getState<T>((path, value) => {
     sync(store, path, value);
   });
-  store = proxy(state);
+  store = setup(proxy(state), (path, value) => {
+    ElectronValtioBridge.forward(path, value);
+  });
   return store;
 };
