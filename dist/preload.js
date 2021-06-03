@@ -8,8 +8,12 @@ var getState = function (subscriber) {
     });
     return JSON.parse(state);
 };
+var forward = function (path, value) {
+    electron_1.ipcRenderer.send('ev-forward', path, value);
+};
 var bridge = {
     getState: getState,
+    forward: forward,
 };
 try {
     electron_1.contextBridge.exposeInMainWorld('ElectronValtioBridge', bridge);
