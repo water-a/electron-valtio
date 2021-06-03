@@ -5,8 +5,7 @@
   "main": "dist",
   "scripts": {
     "lint": "eslint . --ext .ts",
-    "build": "tsc",
-    "postinstall": "npm run build"
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
