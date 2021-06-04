@@ -10,7 +10,7 @@ This library was heavily inspired by electron-redux.
 
 ### Getting started
 
-`npm i valtio https://github.com/water-a/electron-valtio`
+`npm i valtio electron-valtio`
 
 #### Include the preload script when opening the browser window
 

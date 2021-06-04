@@ -3,9 +3,11 @@
   "version": "0.0.2",
   "description": "",
   "main": "dist",
+  "types": "dist",
   "scripts": {
     "lint": "eslint . --ext .ts",
-    "build": "tsc"
+    "build": "tsc",
+    "prepublish": "npm run build"
   },
   "author": "",
   "license": "ISC",
