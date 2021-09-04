@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint . --ext .ts",
     "build": "tsc",
-    "publish": "gulp"
+    "pub": "gulp"
   },
   "author": "",
   "license": "ISC",
