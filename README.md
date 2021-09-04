@@ -19,7 +19,8 @@ This library was heavily inspired by electron-redux.
 const window = new BrowserWindow({
   ...other options,
   webPreferences: {
-    preload: path.resolve(__dirname, 'node_modules/electron-valtio/dist/preload.js')
+    // Or you can import it in your existing preload file
+    preload: path.resolve(__dirname, 'node_modules/electron-valtio/preload.js')
   }
 });
 ...
@@ -29,7 +30,7 @@ const window = new BrowserWindow({
 
 ```typescript
 import { snapshot } from 'valtio/vanilla';
-import { setupMain } from 'electron-valtio/dist/main';
+import { setupMain } from 'electron-valtio/main';
 
 const store = setupMain({
   count: 0,
@@ -45,7 +46,7 @@ setTimeout(() => {
 
 ```typescript
 import { snapshot } from 'valtio/vanilla';
-import { setupRenderer } from 'electron-valtio/dist/renderer';
+import { setupRenderer } from 'electron-valtio/renderer';
 
 const store = setupRenderer();
 console.log(snapshot(store.count));
