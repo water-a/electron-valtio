@@ -5,8 +5,8 @@ import { sync } from './sync';
 
 export const setupMain = <T extends object>(initialObject: T) => {
   const store = proxy(initialObject);
-  ipcMain.on('ev-forward', (_, path: string[], value: any) =>
-    sync(store, path, value),
+  ipcMain.on('ev-forward', (_, path: string[], value: string) =>
+    sync(store, path, JSON.parse(value)),
   );
   ipcMain.on('ev-get-state', (event) => {
     event.returnValue = JSON.stringify(snapshot(store));
@@ -14,6 +14,8 @@ export const setupMain = <T extends object>(initialObject: T) => {
   return setup(store, (path, value) =>
     webContents
       .getAllWebContents()
-      .forEach((contents) => contents.send('ev-forward', path, value)),
+      .forEach((contents) =>
+        contents.send('ev-forward', path, JSON.stringify(value)),
+      ),
   );
 };

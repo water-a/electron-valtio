@@ -11,15 +11,17 @@ declare global {
   const ElectronValtioBridge: Bridge;
 }
 
-const getState = <T>(subscriber: (path: string[], value: any) => void): T => {
+const getState = <T>(
+  subscriber: (path: string[], value: string) => void,
+): T => {
   const state = ipcRenderer.sendSync('ev-get-state');
-  ipcRenderer.on('ev-forward', (_, path: string[], value: any) => {
+  ipcRenderer.on('ev-forward', (_, path: string[], value: string) => {
     subscriber(path, value);
   });
   return JSON.parse(state);
 };
 
-const forward = (path: string[], value: any) => {
+const forward = (path: string[], value: string) => {
   ipcRenderer.send('ev-forward', path, value);
 };
 

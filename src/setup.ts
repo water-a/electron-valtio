@@ -6,6 +6,13 @@ export const setup = <T extends Record<string, any>>(
   const baseObject = Array.isArray(initialObject)
     ? []
     : Object.create(Object.getPrototypeOf(initialObject));
+  Reflect.ownKeys(initialObject).forEach((key) => {
+    const desc = Object.getOwnPropertyDescriptor(
+      initialObject,
+      key,
+    ) as PropertyDescriptor;
+    Object.defineProperty(baseObject, key, desc);
+  });
   return new Proxy(baseObject, {
     get(_, prop: string) {
       const accessed = initialObject[prop];
@@ -23,6 +30,9 @@ export const setup = <T extends Record<string, any>>(
       // @ts-ignore
       initialObject[prop] = value;
       return true;
+    },
+    deleteProperty(_, prop) {
+      return Reflect.deleteProperty(initialObject, prop);
     },
   });
 };
