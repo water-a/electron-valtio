@@ -16,13 +16,13 @@ const getState = <T>(
 ): T => {
   const state = ipcRenderer.sendSync('ev-get-state');
   ipcRenderer.on('ev-forward', (_, path: string[], value: string) => {
-    subscriber(path, value);
+    subscriber(path, JSON.parse(value));
   });
   return JSON.parse(state);
 };
 
-const forward = (path: string[], value: string) => {
-  ipcRenderer.send('ev-forward', path, value);
+const forward = (path: string[], value: any) => {
+  ipcRenderer.send('ev-forward', path, JSON.stringify(value));
 };
 
 const bridge = {
