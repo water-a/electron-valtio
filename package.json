@@ -1,12 +1,48 @@
 {
   "name": "electron-valtio",
-  "version": "0.0.7",
+  "version": "0.0.12",
   "description": "",
   "private": true,
   "scripts": {
     "lint": "eslint . --ext .ts",
-    "build": "tsc",
+    "build": "npm run clean && npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc -p config/tsconfig.cjs.json",
+    "build:esm": "tsc -p config/tsconfig.esm.json",
+    "clean": "rm -rf dist",
     "pub": "gulp"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    "./main": {
+      "types": "./main.d.ts",
+      "module": "./esm/main.js",
+      "import": "./esm/main.js",
+      "default": "./main.js"
+    },
+    "./preload": {
+      "types": "./preload.d.ts",
+      "module": "./esm/preload.js",
+      "import": "./esm/preload.js",
+      "default": "./preload.js"
+    },
+    "./renderer": {
+      "types": "./renderer.d.ts",
+      "module": "./esm/renderer.js",
+      "import": "./esm/renderer.js",
+      "default": "./renderer.js"
+    },
+    "./setup": {
+      "types": "./setup.d.ts",
+      "module": "./esm/setup.js",
+      "import": "./esm/setup.js",
+      "default": "./setup.js"
+    },
+    "./sync": {
+      "types": "./types/sync.d.ts",
+      "module": "./esm/sync.js",
+      "import": "./esm/sync.js",
+      "default": "./cjs/sync.js"
+    }
   },
   "author": "",
   "license": "ISC",
