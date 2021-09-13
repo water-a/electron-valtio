@@ -4,6 +4,7 @@ declare global {
   interface Bridge {
     getState: typeof getState;
     forward: typeof forward;
+    getRefPaths: typeof getRefPaths;
   }
   interface Window {
     ElectronValtioBridge: Bridge;
@@ -25,9 +26,13 @@ const forward = (path: string[], value: any) => {
   ipcRenderer.send('ev-forward', path, JSON.stringify(value));
 };
 
+const getRefPaths = (): Set<string> =>
+  new Set(ipcRenderer.sendSync('ev-get-ref-paths'));
+
 const bridge = {
   getState,
   forward,
+  getRefPaths,
 };
 
 try {

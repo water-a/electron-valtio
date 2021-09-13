@@ -11,7 +11,8 @@ module.exports = {
   ],
   rules: {
     'import/prefer-default-export': 'off',
-    'no-param-reassign': 'off',
     'import/no-extraneous-dependencies': 'off',
+    'no-param-reassign': 'off',
+    'no-restricted-syntax': 'off',
   },
 };
