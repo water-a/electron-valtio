@@ -22,8 +22,8 @@ const getState = <T>(
   return JSON.parse(state);
 };
 
-const forward = (path: string[], value: any) => {
-  ipcRenderer.send('ev-forward', path, JSON.stringify(value));
+const forward = (path: string[], value: string) => {
+  ipcRenderer.send('ev-forward', path, value);
 };
 
 const getRefPaths = (): Set<string> =>
