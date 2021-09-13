@@ -18,12 +18,12 @@ export const setup = <T extends Record<string, any>>(
       const accessed = initialObject[prop];
       if (
         typeof prop !== 'symbol' &&
-        (typeof accessed === 'object' || typeof accessed === 'function') &&
+        typeof accessed === 'object' &&
         accessed != null
       ) {
         return setup(accessed, onSet, [...path, prop]);
       }
-      return initialObject[prop];
+      return accessed;
     },
     set(_, prop: string, value) {
       onSet([...path, prop], value);
