@@ -17,7 +17,7 @@ const getState = <T>(
 ): T => {
   const state = ipcRenderer.sendSync('ev-get-state');
   ipcRenderer.on('ev-forward', (_, path: string[], value: string) => {
-    subscriber(path, JSON.parse(value));
+    subscriber(path, value);
   });
   return JSON.parse(state);
 };
